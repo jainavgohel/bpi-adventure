@@ -1,4 +1,6 @@
 import java.util.Random;
+
+//Creates Player Object
 public class Player {
 	private String name;
 	

@@ -1,4 +1,6 @@
 
+
+//Creates Monster Objects
 public class Monster {
 	public String name;
 	public String dialogueFight;
