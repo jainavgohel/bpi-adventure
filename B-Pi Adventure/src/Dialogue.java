@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-//Reservoir for Dialogue 
+//Reservoir for Dialogue  
 public class Dialogue {
 	public ArrayList<String> dialogueList;
 	public int index;
