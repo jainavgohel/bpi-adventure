@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
-//Reservoir for Stephen's dialogue 
-public class Stephen {
+//Reservoir for Dialogue 
+public class Dialogue {
 	public ArrayList<String> dialogueList;
 	public int index;
-	public Stephen(){
+	public Dialogue(){
 		index = 0;
 	}
 	public void setDialogue(String dialogue){
