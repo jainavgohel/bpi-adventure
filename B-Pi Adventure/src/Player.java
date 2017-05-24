@@ -3,23 +3,24 @@ import java.util.Random;
 //Creates Player Object
 public class Player {
 	private String name;
+	private int healthPoint;
+	private int help;
+	public int safePass;
+	
 	
 	public Player(String name){
 		this.name  = name;
+		this.healthPoint = 3;
+		this.help = 3;
 	}
 	
-	public String fight(Monster o){
-		return o.getFight();
+	public void lifeLost(int hit){
+		this.healthPoint = healthPoint - hit;
 	}
 	
-	public String run(Monster o){
-		Random rnd = new Random();
-		if(rnd.nextInt(100) < 33){
-			return o.getRun();
-		} else {
-			return "You are forced to fight/n" + this.fight(o);
-		}
+	public int getLives(){
+		return this.healthPoint;
+	}
 
-	}
 	
 }

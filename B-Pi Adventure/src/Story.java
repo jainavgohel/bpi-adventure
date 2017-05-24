@@ -3,21 +3,28 @@ import java.util.Scanner;
 
 //Client 
 public class Story {
-	public static int lives = 3;
-	public static int help = 3;
+	
+	
 	public static void main(String args[]) {
 		Scanner console = new Scanner(System.in);
 		Random r1 = new Random();
 		Player p1 = new Player(name(console));
 		
 		
+		
 	}
 	
-	public static void lifeCheck(){
-		if(lives == 0) {
-			System.out.print("Game over");
-		}
-		System.exit(0);
+	public static void monsterApproach(Monster m, int approach1, Scanner console){
+		System.out.println(m.getMonth());
+//		System.out.print();
+		int selection = numMenu(console);
+		
+		
+	}
+	
+	public static int numMenu(Scanner console) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 		
 	public static String name(Scanner console) {
