@@ -7,7 +7,7 @@ public class Dialogue {
 	public Dialogue(){
 		index = 0;
 	}
-	public void setDialogue(String dialogue){
+	public void addDialogue(String dialogue){
 		dialogueList.add(dialogue);
 	}
 	public String getDialogue(){
