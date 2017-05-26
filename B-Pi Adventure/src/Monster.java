@@ -6,10 +6,13 @@ public class Monster {
 	public String month;
 	public String fight;
 	public String[] options;
+	public String winCondition;
 	public ArrayList<String> paths;
 
 	
 	public Monster(String name) {
+		this.paths = new ArrayList<String>();
+		this.options = new String[4];
 		this.name = name;
 	}
 	
@@ -39,25 +42,29 @@ public class Monster {
 		paths.add(path);
 	}
 	
+	public void setWin(String winCondition) {
+		this.winCondition = winCondition;
+	}
+	
 	public String getEncounter(){
 		return paths.get(0);
 	}
 	
 	public String getHarmedPath(){
-		return paths.get(2);
+		return paths.get(1);
 	}
 	
 	public String getSafePath(){
-		return paths.get(3);
+		return paths.get(2);
 	}
 	
 	public String getSafePassage(){
 		//implement SafePassage count 
-		return paths.get(5);
+		return paths.get(3);
 	}
 	
 	public String getFightPath(){
-		return paths.get(6);
+		return paths.get(4);
 	}
 	
 	public String getRun(){
@@ -86,10 +93,15 @@ public class Monster {
 		 String fightMenu = "";
 		 fightMenu = fight;
 		 for(int i = 0; i < options.length; i++){
-			 fightMenu += "/n";
+			 fightMenu += "\n";
 			 fightMenu += options[i];
 		 }
 		 return fightMenu;
 	}
+
+	public String getWinCondition(){
+		return winCondition;
+	}
+	
 
 }

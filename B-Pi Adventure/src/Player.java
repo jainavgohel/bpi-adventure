@@ -14,6 +14,10 @@ public class Player {
 		this.help = 3;
 	}
 	
+	public void safePass(){
+		safePass++;
+	}
+	
 	public void lifeLost(int hit){
 		this.healthPoint = healthPoint - hit;
 	}

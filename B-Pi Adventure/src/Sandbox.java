@@ -12,7 +12,6 @@ public class Sandbox {
 	
 	public static Monster createMon(){
 		Monster m1 = new Monster("September");
-		String[] path = new String[10];
 		m1.setPaths("You see a path that leads to a clearing, filled with flowers, and a path that leads "
 				+ "deeper into the woods. You hear the rush of a waterfall from the one that leads deeper into "
 				+ "the woods. Do you take the path into the woods or head towards the waterfall?");
