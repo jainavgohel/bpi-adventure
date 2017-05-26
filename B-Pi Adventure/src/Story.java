@@ -14,19 +14,19 @@ public class Story {
 		monsterGenerator(monsterList);
 		monsterMap(monsterList, console, p1);
 		finalBoss();
-		
+
 	}
 
 	private static void finalBoss() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public static void monsterMap(ArrayList<Monster> monsterList, Scanner console, Player p1) {
-		for(int i = 0; i < monsterList.size(); i++){
+		for (int i = 0; i < monsterList.size(); i++) {
 			monsterApproach(monsterList.get(i), console, p1);
 		}
-		
+
 	}
 
 	public static void monsterGenerator(ArrayList<Monster> monsterList) throws FileNotFoundException {
@@ -38,20 +38,29 @@ public class Story {
 			monsterData.add(input.next());
 		}
 
-		for (int i = 0; i < monsterData.size(); i++) {
+		for (int i = -1; i < monsterData.size()-monsterList.size();) {
+			i++;
 			Monster mTemp = new Monster(monsterData.get(i));
 			i++;
 			mTemp.setMonth(monsterData.get(i));
 			i++;
-			for (int j = 0; j < 5; j++) {
-				mTemp.setPaths(monsterData.get(i));
-				i++;
-			}
-			
+			mTemp.setPaths(monsterData.get(i));
+			i++;
+			mTemp.setPaths(monsterData.get(i));
+			i++;
+			mTemp.setPaths(monsterData.get(i));
+			i++;
+			mTemp.setPaths(monsterData.get(i));
+			i++;
+			mTemp.setPaths(monsterData.get(i));
+			i++;
 			mTemp.setFight(monsterData.get(i), monsterData.get(i + 1), monsterData.get(i + 2), monsterData.get(i + 3),
 					monsterData.get(i + 4));
-			i = i + 5;
-			System.out.println("blank " + monsterData.get(i));
+			i++;
+			i++;
+			i++;
+			i++;
+			i++;
 			mTemp.setWin(monsterData.get(i));
 			monsterList.add(mTemp);
 		}
@@ -114,7 +123,7 @@ public class Story {
 					correct = ynMenu(console);
 				}
 				if (answer.equals(m.getWinCondition())) {
-					
+
 					System.out.print(m.getFightWin());
 				} else {
 					p.lifeLost(10);
@@ -126,7 +135,7 @@ public class Story {
 	}
 
 	public static String name(Scanner console) {
-		System.out.print(" Hello! I am mage Stephen, your guide on this journey. \n"
+		System.out.print("Hello! I am mage Stephen, your guide on this journey. \n"
 				+ "Our kingdom has been ransacked by monsters the last year, and \n"
 				+ "our residents have thus been unable to submit projects via \n"
 				+ "Hypergrade, something which is ruining our kingdom’s economy. \n"
