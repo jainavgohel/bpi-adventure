@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 //Client 
 public class Story {
@@ -19,7 +20,23 @@ public class Story {
 
 	private static void finalBoss() {
 		// TODO Auto-generated method stub
-
+	}
+	
+	public static void parsePrint(String output) {
+		String[] s3 = output.split(" ");
+		int i;
+		for (i = 0; i < s3.length; i++) {
+			System.out.print(s3[i] + " ");
+			try {
+				TimeUnit.MILLISECONDS.sleep(80);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if ((i+2) % 10 == 0) {
+				System.out.println();
+			}
+		}
 	}
 
 	public static void monsterMap(ArrayList<Monster> monsterList, Scanner console, Player p1) {
@@ -35,7 +52,11 @@ public class Story {
 		Scanner input = new Scanner(f);
 		input.useDelimiter("/");
 		while (input.hasNext()) {
-			monsterData.add(input.next());
+			String withLine = input.next();
+			if(withLine.contains("\n")){
+				withLine = withLine.replaceAll("\n", "");
+			}
+			monsterData.add(withLine);
 		}
 
 		for (int i = -1; i < monsterData.size()-monsterList.size();) {
@@ -67,23 +88,23 @@ public class Story {
 	}
 
 	public static void monsterApproach(Monster m, Scanner console, Player p) {
-		System.out.println(m.getMonth());
-		System.out.println(m.getEncounter());
+		System.out.println("\n\n" + m.getMonth());
+		parsePrint(m.getEncounter());
 		int selection = numMenu(console);
 		if (selection == 1) {
-			System.out.println(m.getSafePath());
+			parsePrint(m.getSafePath());
 			selection = 0;
 			selection = numMenu(console);
 			if (selection == 1) {
-				System.out.println(m.getFightPath());
+				parsePrint(m.getFightPath());
 				monsterFight(m, console, p);
 			} else if (selection == 2) {
 				p.safePass();
-				System.out.println(m.getSafePassage());
+				parsePrint(m.getSafePassage());
 			}
 		} else if (selection == 2) {
 			p.lifeLost(8);
-			System.out.println(m.getHarmedPath());
+			parsePrint(m.getHarmedPath());
 		}
 	}
 
@@ -135,27 +156,27 @@ public class Story {
 	}
 
 	public static String name(Scanner console) {
-		System.out.print("Hello! I am mage Stephen, your guide on this journey. \n"
-				+ "Our kingdom has been ransacked by monsters the last year, and \n"
-				+ "our residents have thus been unable to submit projects via \n"
-				+ "Hypergrade, something which is ruining our kingdom’s economy. \n"
-				+ "But first, tell me, what is your name? \n");
+		parsePrint("Hello! I am mage Stephen, your guide on this journey. "
+				+ "Our kingdom has been ransacked by monsters the last year, and "
+				+ "our residents have thus been unable to submit projects via "
+				+ "Hypergrade, something which is ruining our kingdom’s economy. "
+				+ "But first, tell me, what is your name? ");
 		boolean correct = false;
 		String name = "";
 		while (!correct) {
-			System.out.print("Enter your name: ");
+			System.out.print("\nEnter your name: ");
 			name = console.next();
 			System.out.print(name + " Is this name correct?");
 			correct = ynMenu(console);
 		}
 
-		System.out.print("Nice to meet you, " + name + "! Let’s get this journey started. If you look to your left, \n"
-				+ "you’ll see that you have your laptop, which allows you to engage \n"
-				+ "in battles with monsters, and has the main controls. In your bag, \n"
-				+ "you have a map and a progress tracker, which shows what you decided \n"
-				+ "to do. You can call me three times to give you hints, but after that, \n"
-				+ "I cannot spend anymore time as I must help other adventures too. Oh \n"
-				+ "look! We’re nearing the forest now. \n");
+		parsePrint("Nice to meet you, " + name + "! Let’s get this journey started. If you look to your left, "
+				+ "you’ll see that you have your laptop, which allows you to engage "
+				+ "in battles with monsters, and has the main controls. In your bag, "
+				+ "you have a map and a progress tracker, which shows what you decided "
+				+ "to do. You can call me three times to give you hints, but after that, "
+				+ "I cannot spend anymore time as I must help other adventures too. Oh "
+				+ "look! We’re nearing the forest now. ");
 
 		return name;
 

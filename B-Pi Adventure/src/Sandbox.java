@@ -3,14 +3,16 @@ import java.util.*;
 //Use for experimentation
 public class Sandbox {
 	public static void main(String args[]) {
-//		System.out.println("This is a sandbox");
-//		System.out.println("This is a cmd sandbox");
+		// System.out.println("This is a sandbox");
+		// System.out.println("This is a cmd sandbox");
 		Scanner console = new Scanner(System.in);
-		System.out.print(ynMenu(console));
-		System.out.print(numMenu(console,4));
+//		System.out.print(ynMenu(console));
+//		System.out.print(numMenu(console, 4));
+		parsePrint("This is a test string This is a test string This is a test string");
+
 	}
-	
-	public static Monster createMon(){
+
+	public static Monster createMon() {
 		Monster m1 = new Monster("September");
 		m1.setPaths("You see a path that leads to a clearing, filled with flowers, and a path that leads "
 				+ "deeper into the woods. You hear the rush of a waterfall from the one that leads deeper into "
@@ -31,16 +33,27 @@ public class Sandbox {
 				+ "and the note transforms into a giant knight made out of paper. ");
 		return m1;
 	}
-	
-	public static int numMenu(Scanner console, int options){
+
+	public static int numMenu(Scanner console, int options) {
 		return -1;
+	}
+
+	public static void parsePrint(String output) {
+		String[] s3 = output.split(" ");
+		int i;
+		for (i = 0; i < s3.length; i++) {
+			System.out.print(s3[i] + " ");
+			if ((i+2) % 7 == 0) {
+				System.out.println();
+			}
+		}
 	}
 
 	public static boolean ynMenu(Scanner console) {
 		System.out.print("\n(Y/N): ");
 		boolean robust = false;
 		while (!robust) {
-			
+
 			String input = console.next();
 			if (input.equalsIgnoreCase("Y")) {
 				robust = true;
@@ -50,7 +63,7 @@ public class Sandbox {
 				return false;
 			}
 			System.out.print("Invalid input. Try Again.\n(Y/N): ");
-			
+
 		}
 		return false;
 	}
