@@ -15,13 +15,30 @@ public class Story {
 		monsterGenerator(monsterList);
 		monsterMap(monsterList, console, p1);
 		finalBoss();
-
 	}
 
 	private static void finalBoss() {
-		// TODO Auto-generated method stub
+		parsePrint(
+				"You walk in the throne room, ready to see the man you owe your life for, King Bruck. "
+				+ "Opening the large doors leading into the room, you are surprised to find out that "
+				+ "the entire room is dark. Suddenly, a light turns on and you see King Bruck tied up "
+				+ "and dangling from the ceiling, struggling with the rope. You run over and cut the "
+				+ "ropes to free your King using your laptop. Gagged, King Bruck gestures his thanks "
+				+ "and you tell him not to worry, that you would track down whoever did this to him. Suddenly, "
+				+ "his eyes widen and King Bruck points to something behind you.You ready your laptop. You whirl around. "
+				+ "In front of you is the monster that parents tell their kids to be wary of, the monster"
+				+ " that instills nightmares in every citizen of BPi. It is the AP Computer Science A AP test,"
+				+ " and standing behind it is Stephen. Thankful, you run over and ask Stephen for his help to "
+				+ "defeat the monster, but he only smirks and pushes you back, into the grasps of the monster. "
+				+ "You understand now. All along, Stephen had been the one who unleashed all of the monsters onto the kingdom. "
+				+ "“Hey <user input name>, looks like we meet again! Need any more hints?” Stephen laughs. "
+				+ "The AP Test grasps you and lifts you into the air, throwing you on the ground."
+				+ "Picking yourself up, you take out your dented laptop and prepare for the final battle.");
+		
+		
+		
 	}
-	
+
 	public static void parsePrint(String output) {
 		String[] s3 = output.split(" ");
 		int i;
@@ -33,7 +50,7 @@ public class Story {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			if ((i+2) % 10 == 0) {
+			if ((i + 2) % 10 == 0) {
 				System.out.println();
 			}
 		}
@@ -53,13 +70,13 @@ public class Story {
 		input.useDelimiter("/");
 		while (input.hasNext()) {
 			String withLine = input.next();
-			if(withLine.contains("\n")){
-				withLine = withLine.replaceAll("\n", "");
+			if (withLine.contains("\n")) {
+				withLine = withLine.replaceAll("\n", "").replaceAll("\r", "");
 			}
 			monsterData.add(withLine);
 		}
 
-		for (int i = -1; i < monsterData.size()-monsterList.size();) {
+		for (int i = -1; i < monsterData.size() - monsterList.size();) {
 			i++;
 			Monster mTemp = new Monster(monsterData.get(i));
 			i++;
@@ -157,10 +174,10 @@ public class Story {
 
 	public static String name(Scanner console) {
 		parsePrint("Hello! I am mage Stephen, your guide on this journey. "
-				+ "Our kingdom has been ransacked by monsters the last year, and "
-				+ "our residents have thus been unable to submit projects via "
-				+ "Hypergrade, something which is ruining our kingdom’s economy. "
-				+ "But first, tell me, what is your name? ");
+				+ "Our kingdom has been ransacked by monsters the last year, "
+				+ "and our residents have thus been unable to submit projects "
+				+ "via Hypergrade, something which is ruining our kingdom’s economy. "
+				+ "But first, tell me, whats your name?");
 		boolean correct = false;
 		String name = "";
 		while (!correct) {
@@ -170,13 +187,12 @@ public class Story {
 			correct = ynMenu(console);
 		}
 
-		parsePrint("Nice to meet you, " + name + "! Let’s get this journey started. If you look to your left, "
-				+ "you’ll see that you have your laptop, which allows you to engage "
-				+ "in battles with monsters, and has the main controls. In your bag, "
-				+ "you have a map and a progress tracker, which shows what you decided "
-				+ "to do. You can call me three times to give you hints, but after that, "
-				+ "I cannot spend anymore time as I must help other adventures too. Oh "
-				+ "look! We’re nearing the forest now. ");
+		parsePrint("Nice to meet you, " + name + "! " + "Let’s get this journey started. If you look to your left, "
+				+ "you’ll see that you have your laptop, which allows you to "
+				+ "engage in battles with monsters, and has the main controls. "
+				+ "In your bag, you have general guidelines about your status "
+				+ "and HP as well a progress tracker, which shows what "
+				+ "month you’re in. Oh look! We’re nearing the forest now. ");
 
 		return name;
 
