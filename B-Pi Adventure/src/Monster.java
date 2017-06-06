@@ -95,10 +95,15 @@ public class Monster {
 		 for(int i = 0; i < options.length; i++){
 			 fightMenu += "\n";
 			 fightMenu += options[i];
+			 fightMenu += " (" + (i+1) + ")";
 		 }
 		 return fightMenu;
 	}
 
+	public String getFightOption(int i){
+		return options[i-1];
+	}
+	
 	public String getWinCondition(){
 		return winCondition;
 	}

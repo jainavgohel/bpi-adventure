@@ -10,11 +10,25 @@ public class Story {
 
 	public static void main(String args[]) throws FileNotFoundException {
 		Scanner console = new Scanner(System.in);
-		Player p1 = new Player(name(console));
-		ArrayList<Monster> monsterList = new ArrayList<Monster>();
-		monsterGenerator(monsterList);
-		monsterMap(monsterList, console, p1);
-		finalBoss(p1, console);
+		boolean replay = true;
+		while (replay) {
+			Player p1 = new Player(name(console));
+			ArrayList<Monster> monsterList = new ArrayList<Monster>();
+			monsterGenerator(monsterList);
+			monsterMap(monsterList, console, p1);
+			finalBoss(p1, console);
+			replay = endMenu(p1, console);
+		}
+	}
+
+	public static boolean endMenu(Player p1, Scanner console) {
+		boolean replay = false;
+		System.out.print("\n\nEND");
+		System.out.print("\nMonster encounters: " + p1.getMonsterEncounter());
+		System.out.print("\nBattle Wins: " + p1.getMonsterWin());
+		System.out.print("\nPLAY AGAIN?");
+		replay = ynMenu(console);
+		return replay;
 	}
 
 	public static void finalBoss(Player p1, Scanner console) {
@@ -39,25 +53,24 @@ public class Story {
 				+ "Picking yourself up, you take out your dented laptop and prepare for the final battle.");
 
 		System.out.println("It is time for the final battle. In this battle, your skills will help you/n"
-				+ " and your lack of skills will hurt you. To win this battle you must enter a number higher than Stephen. Enter a number between 1 and 10.");
-
-		int slNum = r1.nextInt(100);
-		int suNum = r1.nextInt(100);
-		int pRan = r1.nextInt(10);
+				+ " and your lack of skills will hurt you. \n To win this battle you must enter a number higher than Stephen. \n Enter a number between 1 and 10.");
+		int sbNum = (r1.nextInt(10))*10;
+		int slNum = sbNum+5;
+		int suNum = sbNum-5;
 		int pNum = 314;
 		boolean robust = false;
 		while (!robust) {
 			pNum = console.nextInt();
-			if (((pNum < 10) && (pNum > 0)) || (pNum == 314)) {
+			if (((pNum < 10) && (pNum > 0))) {
 				robust = true;
 			} else {
 				System.out.print("Invalid input. Try Again.\nEnter a number between 1 and 10: ");
 			}
 		}
 
-		pNum = pNum * pRan;
-		System.out.println();
-		if ((slNum <= pNum && suNum >= pNum) || (pNum == 314)) {
+		pNum = pNum * 10;
+		System.out.println("Stephens Number: " + sbNum);
+		if ((slNum <= pNum && suNum >= pNum) || (p1.getName().equals("BPI")) || ((p1.getSafePass() < 5)) || (p1.getMonsterWin() > 5)) {
 			parsePrint("The AP Test falls apart, and crumbles to the ground. "
 					+ "Shocked, Stephen stares at you and backs towards the wall, "
 					+ "whimpering. “Please, I’m sorry,” he begs. You knock him out "
@@ -158,7 +171,7 @@ public class Story {
 			selection = numMenu(console);
 			if (selection == 1) {
 				parsePrint(m.getFightPath());
-				monsterFight(m, console, p);
+				monsterFightMenu(m, console, p);
 			} else if (selection == 2) {
 				p.safePass();
 				parsePrint(m.getSafePassage());
@@ -169,53 +182,46 @@ public class Story {
 		}
 	}
 
-	public static void monsterFight(Monster m, Scanner console, Player p) {
+	public static void monsterFightMenu(Monster m, Scanner console, Player p) {
+		
 		System.out.print("\nYou have entered battle. Your opponent is " + m.getName()
-				+ ".\nYou may chose to run, but you may not succeed." + "Fight(1) or Run(2)");
+				+ ".\nYou may chose to run, but you may not succeed." + "\nFight(1) or Run(2): ");
 		int selection = numMenu(console);
 		Random r1 = new Random();
 		if (selection == 1) {
-			System.out.println(m.getFight());
-			boolean correct = false;
-			String answer = "";
-			while (!correct) {
-				System.out.print("Enter answer: ");
-				answer = console.next();
-				System.out.print(answer + " Is this answer correct? (Y/N) ");
-				correct = ynMenu(console);
-			}
-			if (answer.equals(m.getWinCondition())) {
-				System.out.println(m.getFightWin());
-			} else {
-				p.lifeLost(9);
-				System.out.println(m.getFightLose());
-			}
+			monsterFight(m,console,p);
 		} else if (selection == 2) {
 			if (r1.nextInt(100) < 33) {
 				System.out.println(m.getRun());
 			} else {
 				System.out.print("You have failed to run. You must fight.");
-				System.out.print(m.getFight());
-				boolean correct = false;
-				String answer = "";
-				while (!correct) {
-					System.out.print("Enter answer: ");
-					answer = console.next();
-					System.out.print(answer + " Is this answer correct? (Y/N) ");
-					correct = ynMenu(console);
-				}
-				if (answer.equals(m.getWinCondition())) {
-
-					System.out.print(m.getFightWin());
-				} else {
-					p.lifeLost(10);
-					System.out.print(m.getFightLose());
-				}
+				monsterFight(m,console,p);
 			}
 		}
 
 	}
 
+	public static void monsterFight(Monster m, Scanner console, Player p){
+		p.monsterEncounter();
+		System.out.println(m.getFight());
+		boolean correct = false;
+		int answer = -1;
+		while (!correct) {
+			System.out.print("Enter answer: ");
+			answer = fightOptionMenu(console);
+			System.out.print( m.getFightOption(answer) + " Is this your final answer? ");
+			correct = ynMenu(console);
+		} 
+		
+		if (m.getFightOption(answer).equals(m.getWinCondition())) {
+			p.monsterWin();
+			System.out.println(m.getFightWin());
+		} else {
+			p.lifeLost(9);
+			System.out.println(m.getFightLose());
+		}
+	}
+	
 	public static String name(Scanner console) {
 		parsePrint("Hello! I am mage Stephen, your guide on this journey. "
 				+ "Our kingdom has been ransacked by monsters the last year, "
@@ -242,6 +248,28 @@ public class Story {
 
 	}
 
+	public static int fightOptionMenu(Scanner console) {
+		boolean robust = false;
+		while (!robust) {
+			String input = console.next();
+			if (input.equalsIgnoreCase("1")) {
+				robust = true;
+				return 1;
+			} else if (input.equalsIgnoreCase("2")) {
+				robust = true;
+				return 2;
+			}else if (input.equalsIgnoreCase("3")) {
+				robust = true;
+				return 3;
+			}else if (input.equalsIgnoreCase("4")) {
+				robust = true;
+				return 4;
+			}
+			System.out.print("Invalid input. Try Again.");
+		}
+		return 0;
+	}
+	
 	public static int numMenu(Scanner console) {
 		boolean robust = false;
 		while (!robust) {
@@ -254,7 +282,7 @@ public class Story {
 				robust = true;
 				return 2;
 			}
-			System.out.print("Invalid input. Try Again.");
+			System.out.print("Invalid input. Try Again. ");
 
 		}
 		return 0;
@@ -274,7 +302,6 @@ public class Story {
 				return false;
 			}
 			System.out.print("Invalid input. Try Again.\n(Y/N): ");
-
 		}
 		return false;
 	}
