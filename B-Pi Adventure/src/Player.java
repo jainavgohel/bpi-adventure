@@ -10,7 +10,7 @@ public class Player {
 	
 	public Player(String name){
 		this.name  = name;
-		this.healthPoint = 3;
+		this.healthPoint = 100;
 		this.help = 3;
 	}
 	
@@ -25,6 +25,10 @@ public class Player {
 	public int getLives(){
 		return this.healthPoint;
 	}
-
+	
+	public String getName(){
+		return this.name;
+	}
+	
 	
 }

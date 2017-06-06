@@ -14,12 +14,15 @@ public class Story {
 		ArrayList<Monster> monsterList = new ArrayList<Monster>();
 		monsterGenerator(monsterList);
 		monsterMap(monsterList, console, p1);
-		finalBoss();
+		finalBoss(p1, console);
 	}
 
-	private static void finalBoss() {
-		parsePrint(
-				"You walk in the throne room, ready to see the man you owe your life for, King Bruck. "
+	public static void finalBoss(Player p1, Scanner console) {
+		Random r1 = new Random();
+
+		System.out.println("MAY");
+
+		parsePrint("You walk in the throne room, ready to see the man you owe your life for, King Bruck. "
 				+ "Opening the large doors leading into the room, you are surprised to find out that "
 				+ "the entire room is dark. Suddenly, a light turns on and you see King Bruck tied up "
 				+ "and dangling from the ceiling, struggling with the rope. You run over and cut the "
@@ -31,12 +34,51 @@ public class Story {
 				+ " and standing behind it is Stephen. Thankful, you run over and ask Stephen for his help to "
 				+ "defeat the monster, but he only smirks and pushes you back, into the grasps of the monster. "
 				+ "You understand now. All along, Stephen had been the one who unleashed all of the monsters onto the kingdom. "
-				+ "“Hey <user input name>, looks like we meet again! Need any more hints?” Stephen laughs. "
+				+ "“Hey "+p1.getName()+", looks like we meet again! Need any more hints?” Stephen laughs. "
 				+ "The AP Test grasps you and lifts you into the air, throwing you on the ground."
 				+ "Picking yourself up, you take out your dented laptop and prepare for the final battle.");
+
+		System.out.println("It is time for the final battle. In this battle, your skills will help you/n"
+				+ " and your lack of skills will hurt you. To win this battle you must enter a number higher than Stephen. Enter a number between 1 and 10.");
 		
+		int slNum = r1.nextInt(100);
+		int suNum = r1.nextInt(100);
+		int pRan = r1.nextInt(10);
+		int pNum  = 314;
+		boolean robust = false;
+		while (!robust) {
+			pNum = console.nextInt();
+			if (((pNum < 10) && (pNum > 0)) || (pNum == 314)) {
+				robust = true;
+			} 
+			System.out.print("Invalid input. Try Again.\nEnter a number between 1 and 10: ");
+		}
 		
+		pNum = pNum*pRan;
 		
+		if ((slNum <= pNum && suNum >= pNum) || (pNum == 314)) {
+			parsePrint("The AP Test falls apart, and crumbles to the ground. "
+					+ "Shocked, Stephen stares at you and backs towards the wall, "
+					+ "whimpering. “Please, I’m sorry,” he begs. You knock him out "
+					+ "and ask King Bruck what to do with the unconscious Stephen. "
+					+ "King Bruck gestures to you to carry him out of the room.");
+			System.out.println("EPILOGUE");
+			parsePrint("5 years have passed. King Bruck has officially given you the title of Highest TA, "
+					+ "the most significant title below him. Stephen has been banished from the kingdom, and nobody has heard from him since. "
+					+ "The kingdom, now at peace, thanks you for the high percentage of 5’s and 4’s"
+					+ " you have brought upon the people-- a good omen. You retire to the edge of "
+					+ "the kingdom with your own house and reunited with your old dog. You’ve donated "
+					+ "your laptop to the nation of Mission to house in its museum.");
+		} else {
+			parsePrint("AP Test snarls and lunges for your laptop, destroying it. "
+					+ "Your only chance of winning is gone. “Good boy,” Stephen "
+					+ "says, and throws AP Test a treat. Delighted, AP Test lies "
+					+ "down and crushes your body, making you gasp for air. “Why,” "
+					+ "you gasp, “why did you do this?”Stephen smiles. “Why do you "
+					+ "think? It’s time for an overthrow--King Bruck has too much "
+					+ "power for too long a time.”The last thing you see is "
+					+ "Stephen’s horrible smile as you black out.END");
+		}
 	}
 
 	public static void parsePrint(String output) {
@@ -124,7 +166,7 @@ public class Story {
 			parsePrint(m.getHarmedPath());
 		}
 	}
-
+ 
 	public static void monsterFight(Monster m, Scanner console, Player p) {
 		System.out.print("\nYou have entered battle. Your opponent is " + m.getName()
 				+ ".\nYou may chose to run, but you may not succeed." + "Fight(1) or Run(2)");
