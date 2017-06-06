@@ -34,28 +34,29 @@ public class Story {
 				+ " and standing behind it is Stephen. Thankful, you run over and ask Stephen for his help to "
 				+ "defeat the monster, but he only smirks and pushes you back, into the grasps of the monster. "
 				+ "You understand now. All along, Stephen had been the one who unleashed all of the monsters onto the kingdom. "
-				+ "“Hey "+p1.getName()+", looks like we meet again! Need any more hints?” Stephen laughs. "
+				+ "“Hey " + p1.getName() + ", looks like we meet again! Need any more hints?” Stephen laughs. "
 				+ "The AP Test grasps you and lifts you into the air, throwing you on the ground."
 				+ "Picking yourself up, you take out your dented laptop and prepare for the final battle.");
 
 		System.out.println("It is time for the final battle. In this battle, your skills will help you/n"
 				+ " and your lack of skills will hurt you. To win this battle you must enter a number higher than Stephen. Enter a number between 1 and 10.");
-		
+
 		int slNum = r1.nextInt(100);
 		int suNum = r1.nextInt(100);
 		int pRan = r1.nextInt(10);
-		int pNum  = 314;
+		int pNum = 314;
 		boolean robust = false;
 		while (!robust) {
 			pNum = console.nextInt();
 			if (((pNum < 10) && (pNum > 0)) || (pNum == 314)) {
 				robust = true;
-			} 
-			System.out.print("Invalid input. Try Again.\nEnter a number between 1 and 10: ");
+			} else {
+				System.out.print("Invalid input. Try Again.\nEnter a number between 1 and 10: ");
+			}
 		}
-		
-		pNum = pNum*pRan;
-		
+
+		pNum = pNum * pRan;
+		System.out.println();
 		if ((slNum <= pNum && suNum >= pNum) || (pNum == 314)) {
 			parsePrint("The AP Test falls apart, and crumbles to the ground. "
 					+ "Shocked, Stephen stares at you and backs towards the wall, "
@@ -87,7 +88,7 @@ public class Story {
 		for (i = 0; i < s3.length; i++) {
 			System.out.print(s3[i] + " ");
 			try {
-				TimeUnit.MILLISECONDS.sleep(80);
+				TimeUnit.MILLISECONDS.sleep(90);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -101,6 +102,7 @@ public class Story {
 	public static void monsterMap(ArrayList<Monster> monsterList, Scanner console, Player p1) {
 		for (int i = 0; i < monsterList.size(); i++) {
 			monsterApproach(monsterList.get(i), console, p1);
+			System.out.println();
 		}
 
 	}
@@ -166,7 +168,7 @@ public class Story {
 			parsePrint(m.getHarmedPath());
 		}
 	}
- 
+
 	public static void monsterFight(Monster m, Scanner console, Player p) {
 		System.out.print("\nYou have entered battle. Your opponent is " + m.getName()
 				+ ".\nYou may chose to run, but you may not succeed." + "Fight(1) or Run(2)");
@@ -252,7 +254,7 @@ public class Story {
 				robust = true;
 				return 2;
 			}
-			System.out.print("Invalid input. Try Again.\n(Y/N): ");
+			System.out.print("Invalid input. Try Again.");
 
 		}
 		return 0;
