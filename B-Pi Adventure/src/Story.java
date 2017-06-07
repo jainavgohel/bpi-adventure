@@ -33,7 +33,7 @@ public class Story {
 
 	public static void finalBoss(Player p1, Scanner console) {
 		Random r1 = new Random();
-
+		System.out.println("/n/n");
 		System.out.println("MAY");
 
 		parsePrint("You walk in the throne room, ready to see the man you owe your life for, King Bruck. "
@@ -50,25 +50,24 @@ public class Story {
 				+ "You understand now. All along, Stephen had been the one who unleashed all of the monsters onto the kingdom. "
 				+ "“Hey " + p1.getName() + ", looks like we meet again! Need any more hints?” Stephen laughs. "
 				+ "The AP Test grasps you and lifts you into the air, throwing you on the ground."
-				+ "Picking yourself up, you take out your dented laptop and prepare for the final battle.");
+				+ " Picking yourself up, you take out your dented laptop and prepare for the final battle.");
 
-		System.out.println("It is time for the final battle. In this battle, your skills will help you/n"
+		System.out.println("It is time for the final battle. In this battle, your skills will help you\n"
 				+ " and your lack of skills will hurt you. \n To win this battle you must enter a number higher than Stephen. \n Enter a number between 1 and 10.");
-		int sbNum = (r1.nextInt(10))*10;
-		int slNum = sbNum+5;
-		int suNum = sbNum-5;
+		int sbNum = (r1.nextInt(10));
+		int slNum = sbNum+2;
+		int suNum = sbNum-2;
 		int pNum = 314;
 		boolean robust = false;
 		while (!robust) {
 			pNum = console.nextInt();
-			if (((pNum < 10) && (pNum > 0))) {
+			if (((pNum <= 10) && (pNum > 0))) {
 				robust = true;
 			} else {
 				System.out.print("Invalid input. Try Again.\nEnter a number between 1 and 10: ");
 			}
 		}
 
-		pNum = pNum * 10;
 		System.out.println("Stephens Number: " + sbNum);
 		if ((slNum <= pNum && suNum >= pNum) || (p1.getName().equals("BPI")) || ((p1.getSafePass() < 5)) || (p1.getMonsterWin() > 5)) {
 			parsePrint("The AP Test falls apart, and crumbles to the ground. "
@@ -91,7 +90,7 @@ public class Story {
 					+ "you gasp, “why did you do this?”Stephen smiles. “Why do you "
 					+ "think? It’s time for an overthrow--King Bruck has too much "
 					+ "power for too long a time.”The last thing you see is "
-					+ "Stephen’s horrible smile as you black out.END");
+					+ "Stephen’s horrible smile as you black out.");
 		}
 	}
 
@@ -101,7 +100,7 @@ public class Story {
 		for (i = 0; i < s3.length; i++) {
 			System.out.print(s3[i] + " ");
 			try {
-				TimeUnit.MILLISECONDS.sleep(90);
+				TimeUnit.MILLISECONDS.sleep(120);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -157,6 +156,16 @@ public class Story {
 			i++;
 			i++;
 			mTemp.setWin(monsterData.get(i));
+			i++;
+			mTemp.setTree(Integer.parseInt(monsterData.get(i)));
+			i++;
+			mTemp.setTree(Integer.parseInt(monsterData.get(i)));
+			i++;
+			mTemp.setTree(Integer.parseInt(monsterData.get(i)));
+			i++;
+			mTemp.setTree(Integer.parseInt(monsterData.get(i)));
+			
+			
 			monsterList.add(mTemp);
 		}
 	}
@@ -165,18 +174,18 @@ public class Story {
 		System.out.println("\n\n" + m.getMonth());
 		parsePrint(m.getEncounter());
 		int selection = numMenu(console);
-		if (selection == 1) {
+		if (selection == m.getTree(0)) {
 			parsePrint(m.getSafePath());
 			selection = 0;
 			selection = numMenu(console);
-			if (selection == 1) {
+			if (selection == m.getTree(2)) {
 				parsePrint(m.getFightPath());
 				monsterFightMenu(m, console, p);
-			} else if (selection == 2) {
+			} else if (selection == m.getTree(3)) {
 				p.safePass();
 				parsePrint(m.getSafePassage());
 			}
-		} else if (selection == 2) {
+		} else if (selection == m.getTree(1)) {
 			p.lifeLost(8);
 			parsePrint(m.getHarmedPath());
 		}
