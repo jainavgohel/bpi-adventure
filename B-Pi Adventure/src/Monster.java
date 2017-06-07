@@ -8,10 +8,11 @@ public class Monster {
 	public String[] options;
 	public String winCondition;
 	public ArrayList<String> paths;
-
+	public ArrayList<Integer> selectTree;
 	
 	public Monster(String name) {
 		this.paths = new ArrayList<String>();
+		this.selectTree = new ArrayList<Integer>();
 		this.options = new String[4];
 		this.name = name;
 	}
@@ -38,12 +39,20 @@ public class Monster {
 		}
 	}
 	
+	public void setTree(int order){
+		selectTree.add(order);
+	}
+
 	public void setPaths(String path){
 		paths.add(path);
 	}
 	
 	public void setWin(String winCondition) {
 		this.winCondition = winCondition;
+	}
+	
+	public int getTree(int position){ 
+		return selectTree.get(position);
 	}
 	
 	public String getEncounter(){
